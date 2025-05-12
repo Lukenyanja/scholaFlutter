@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "48737815277",
+    "project_id": "schola-vu",
+    "storage_bucket": "schola-vu.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:48737815277:android:6a7779bef1abb866f11ae4",
+        "android_client_info": {
+          "package_name": "com.mycompany.schola"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "48737815277-n4qji84b9mofem2uvnj09560dkvf76m1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.schola",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "48737815277-ve21fl0os2f5hkici5jj70m9b3lrepug.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdn3d0ErVy0ugKeiRvee492HgMWM_h4CM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "48737815277-ve21fl0os2f5hkici5jj70m9b3lrepug.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "48737815277-f5h9g7ll2i9mh3fg1jkltdc0lr96cl6d.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.schola"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
