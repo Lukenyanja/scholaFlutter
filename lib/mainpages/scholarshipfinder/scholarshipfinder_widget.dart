@@ -10,6 +10,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'scholarshipfinder_model.dart';
 export 'scholarshipfinder_model.dart';
@@ -446,10 +447,9 @@ class _ScholarshipfinderWidgetState extends State<ScholarshipfinderWidget> {
                             child: SizedBox(
                               width: 50.0,
                               height: 50.0,
-                              child: CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  Color(0xFFD10024),
-                                ),
+                              child: SpinKitCubeGrid(
+                                color: Color(0xFFD10024),
+                                size: 50.0,
                               ),
                             ),
                           );

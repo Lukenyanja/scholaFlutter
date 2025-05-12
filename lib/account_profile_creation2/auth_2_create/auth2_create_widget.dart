@@ -670,7 +670,7 @@ class _Auth2CreateWidgetState extends State<Auth2CreateWidget>
                                     return;
                                   }
 
-                                  context.goNamedAuth(
+                                  context.pushNamedAuth(
                                       HomeWidget.routeName, context.mounted);
                                 },
                                 text: 'Continue with Google',

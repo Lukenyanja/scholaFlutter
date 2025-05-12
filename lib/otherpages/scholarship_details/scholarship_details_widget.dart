@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'scholarship_details_model.dart';
 export 'scholarship_details_model.dart';
@@ -57,10 +58,9 @@ class _ScholarshipDetailsWidgetState extends State<ScholarshipDetailsWidget> {
               child: SizedBox(
                 width: 50.0,
                 height: 50.0,
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    Color(0xFFD10024),
-                  ),
+                child: SpinKitCubeGrid(
+                  color: Color(0xFFD10024),
+                  size: 50.0,
                 ),
               ),
             ),
