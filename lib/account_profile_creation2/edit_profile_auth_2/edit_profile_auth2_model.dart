@@ -6,10 +6,10 @@ class EditProfileAuth2Model extends FlutterFlowModel<EditProfileAuth2Widget> {
   ///  State fields for stateful widgets in this component.
 
   final formKey = GlobalKey<FormState>();
-  bool isDataUploading = false;
-  FFUploadedFile uploadedLocalFile =
+  bool isDataUploading_uploadData8ss = false;
+  FFUploadedFile uploadedLocalFile_uploadData8ss =
       FFUploadedFile(bytes: Uint8List.fromList([]));
-  String uploadedFileUrl = '';
+  String uploadedFileUrl_uploadData8ss = '';
 
   // State field(s) for Username widget.
   FocusNode? usernameFocusNode;

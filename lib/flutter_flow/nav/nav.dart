@@ -146,11 +146,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => AuthForgotPasswordWidget(),
         ),
         FFRoute(
-          name: ChatAiScreenWidget.routeName,
-          path: ChatAiScreenWidget.routePath,
-          builder: (context, params) => ChatAiScreenWidget(),
-        ),
-        FFRoute(
           name: QuizWidget.routeName,
           path: QuizWidget.routePath,
           builder: (context, params) =>
@@ -176,7 +171,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: CategoriesWidget.routeName,
           path: CategoriesWidget.routePath,
-          builder: (context, params) => CategoriesWidget(),
+          builder: (context, params) => CategoriesWidget(
+            queryName: params.getParam(
+              'queryName',
+              ParamType.String,
+            ),
+            imageHeader: params.getParam(
+              'imageHeader',
+              ParamType.String,
+            ),
+          ),
         ),
         FFRoute(
           name: Auth2CreateWidget.routeName,

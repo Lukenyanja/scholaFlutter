@@ -17,8 +17,6 @@ export '/simple_authentication/auth_login/auth_login_widget.dart'
     show AuthLoginWidget;
 export '/simple_authentication/auth_forgot_password/auth_forgot_password_widget.dart'
     show AuthForgotPasswordWidget;
-export '/chat_g_p_t/chat_ai_screen/chat_ai_screen_widget.dart'
-    show ChatAiScreenWidget;
 export '/mainpages/quiz/quiz_widget.dart' show QuizWidget;
 export '/otherpages/scholarship_details/scholarship_details_widget.dart'
     show ScholarshipDetailsWidget;

@@ -16,6 +16,9 @@ class ScholarshipsGroup {
   static GetScholarshipsCall getScholarshipsCall = GetScholarshipsCall();
   static GetScholarshipDetailsCall getScholarshipDetailsCall =
       GetScholarshipDetailsCall();
+  static GetCountriesCall getCountriesCall = GetCountriesCall();
+  static GetCountryScholarshipsCall getCountryScholarshipsCall =
+      GetCountryScholarshipsCall();
 }
 
 class GetScholarshipsCall {
@@ -88,7 +91,100 @@ class GetScholarshipDetailsCall {
       ));
 }
 
+class GetCountriesCall {
+  Future<ApiCallResponse> call() async {
+    final baseUrl = ScholarshipsGroup.getBaseUrl();
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'GetCountries',
+      apiUrl: '${baseUrl}/api/scholarships/filter/countries_count/',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class GetCountryScholarshipsCall {
+  Future<ApiCallResponse> call({
+    String? country = 'italy',
+  }) async {
+    final baseUrl = ScholarshipsGroup.getBaseUrl();
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'GetCountryScholarships',
+      apiUrl:
+          '${baseUrl}/api/scholarships/filter/scholarships_Mgr_filter?country=${country}',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 /// End scholarships Group Code
+
+/// Start AI webhook Group Code
+
+class AIWebhookGroup {
+  static String getBaseUrl() =>
+      'https://schola-aiworker.up.railway.app/webhook';
+  static Map<String, String> headers = {};
+  static ChatCall chatCall = ChatCall();
+}
+
+class ChatCall {
+  Future<ApiCallResponse> call({
+    String? message = 'is uganda a good country',
+    String? user = 'qwer2346',
+    String? token = '1243wtretyqwy',
+  }) async {
+    final baseUrl = AIWebhookGroup.getBaseUrl();
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'Chat',
+      apiUrl: '${baseUrl}/chat',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params: {
+        'message': message,
+        'token': token,
+      },
+      bodyType: BodyType.MULTIPART,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  String? feedback(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].output''',
+      ));
+  dynamic res(dynamic response) => getJsonField(
+        response,
+        r'''$''',
+      );
+}
+
+/// End AI webhook Group Code
 
 class ApiPagingParams {
   int nextPageNumber = 0;

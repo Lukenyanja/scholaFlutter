@@ -157,7 +157,7 @@ class _EditProfileAuth2WidgetState extends State<EditProfileAuth2Widget> {
                           child: CachedNetworkImage(
                             fadeInDuration: Duration(milliseconds: 200),
                             fadeOutDuration: Duration(milliseconds: 200),
-                            imageUrl: _model.uploadedFileUrl,
+                            imageUrl: _model.uploadedFileUrl_uploadData8ss,
                             width: 300.0,
                             height: 200.0,
                             fit: BoxFit.cover,
@@ -185,7 +185,8 @@ class _EditProfileAuth2WidgetState extends State<EditProfileAuth2Widget> {
                   if (selectedMedia != null &&
                       selectedMedia.every(
                           (m) => validateFileFormat(m.storagePath, context))) {
-                    safeSetState(() => _model.isDataUploading = true);
+                    safeSetState(
+                        () => _model.isDataUploading_uploadData8ss = true);
                     var selectedUploadedFiles = <FFUploadedFile>[];
 
                     var downloadUrls = <String>[];
@@ -215,13 +216,15 @@ class _EditProfileAuth2WidgetState extends State<EditProfileAuth2Widget> {
                           .toList();
                     } finally {
                       ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                      _model.isDataUploading = false;
+                      _model.isDataUploading_uploadData8ss = false;
                     }
                     if (selectedUploadedFiles.length == selectedMedia.length &&
                         downloadUrls.length == selectedMedia.length) {
                       safeSetState(() {
-                        _model.uploadedLocalFile = selectedUploadedFiles.first;
-                        _model.uploadedFileUrl = downloadUrls.first;
+                        _model.uploadedLocalFile_uploadData8ss =
+                            selectedUploadedFiles.first;
+                        _model.uploadedFileUrl_uploadData8ss =
+                            downloadUrls.first;
                       });
                       showUploadMessage(context, 'Success!');
                     } else {
