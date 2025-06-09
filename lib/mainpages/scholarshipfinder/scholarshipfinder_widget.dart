@@ -1,5 +1,4 @@
 import '/backend/api_requests/api_calls.dart';
-import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -9,7 +8,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -27,13 +25,10 @@ class ScholarshipfinderWidget extends StatefulWidget {
       _ScholarshipfinderWidgetState();
 }
 
-class _ScholarshipfinderWidgetState extends State<ScholarshipfinderWidget>
-    with TickerProviderStateMixin {
+class _ScholarshipfinderWidgetState extends State<ScholarshipfinderWidget> {
   late ScholarshipfinderModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
@@ -42,28 +37,6 @@ class _ScholarshipfinderWidgetState extends State<ScholarshipfinderWidget>
 
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
-
-    animationsMap.addAll({
-      'listViewOnActionTriggerAnimation': AnimationInfo(
-        trigger: AnimationTrigger.onActionTrigger,
-        applyInitialState: true,
-        effectsBuilder: () => [
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-        ],
-      ),
-    });
-    setupAnimations(
-      animationsMap.values.where((anim) =>
-          anim.trigger == AnimationTrigger.onActionTrigger ||
-          !anim.applyInitialState),
-      this,
-    );
   }
 
   @override
@@ -230,6 +203,14 @@ class _ScholarshipfinderWidgetState extends State<ScholarshipfinderWidget>
                         ),
                   ),
                 ),
+                if (FFAppState().loading == true)
+                  Lottie.asset(
+                    'assets/jsons/loader.json',
+                    width: 200.0,
+                    height: 118.22,
+                    fit: BoxFit.contain,
+                    animate: true,
+                  ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -349,17 +330,28 @@ class _ScholarshipfinderWidgetState extends State<ScholarshipfinderWidget>
 
                                 if ((_model.countryfiltered?.succeeded ??
                                     true)) {
+                                  FFAppState().scholarsipsFetched =
+                                      (_model.countryfiltered?.jsonBody ?? '');
+                                  safeSetState(() {});
                                   FFAppState().loading = false;
                                   safeSetState(() {});
-                                  FFAppState().scholarsipsFetched =
-                                      getJsonField(
-                                    (_model.countryfiltered?.jsonBody ?? ''),
-                                    r'''$.results''',
-                                    true,
-                                  )!
-                                          .toList()
-                                          .cast<dynamic>();
-                                  safeSetState(() {});
+                                  await showDialog(
+                                    context: context,
+                                    builder: (alertDialogContext) {
+                                      return AlertDialog(
+                                        title: Text('Alert'),
+                                        content: Text(
+                                            'State = ${FFAppState().scholarsipsFetched.toString()}'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                alertDialogContext),
+                                            child: Text('Ok'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
                                 } else {
                                   await showDialog(
                                     context: context,
@@ -534,290 +526,274 @@ class _ScholarshipfinderWidgetState extends State<ScholarshipfinderWidget>
                     ),
                   ],
                 ),
-                if (!FFAppState().loading)
-                  Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Container(
-                      width: double.infinity,
-                      height: MediaQuery.sizeOf(context).height * 0.61,
-                      decoration: BoxDecoration(
-                        color: Color(0xFF8D5B5B),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(1.0),
-                        child: Builder(
-                          builder: (context) {
-                            final results =
-                                FFAppState().scholarsipsFetched.toList();
+                Container(
+                  constraints: BoxConstraints(
+                    maxHeight: 300.0,
+                  ),
+                  decoration: BoxDecoration(),
+                  child: Container(
+                    decoration: BoxDecoration(),
+                    child: Builder(
+                      builder: (context) {
+                        final ccc = getJsonField(
+                          FFAppState().scholarsipsFetched,
+                          r'''$.results''',
+                        ).toList().take(3).toList();
 
-                            return ListView.separated(
-                              padding: EdgeInsets.symmetric(vertical: 10.0),
-                              scrollDirection: Axis.vertical,
-                              itemCount: results.length,
-                              separatorBuilder: (_, __) =>
-                                  SizedBox(height: 10.0),
-                              itemBuilder: (context, resultsIndex) {
-                                final resultsItem = results[resultsIndex];
-                                return InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    context.pushNamed(
-                                      ScholarshipDetailsWidget.routeName,
-                                      queryParameters: {
-                                        'slug': serializeParam(
-                                          getJsonField(
-                                            resultsItem,
-                                            r'''$.slug''',
-                                          ).toString(),
-                                          ParamType.String,
-                                        ),
-                                      }.withoutNulls,
-                                      extra: <String, dynamic>{
-                                        kTransitionInfoKey: TransitionInfo(
-                                          hasTransition: true,
-                                          transitionType:
-                                              PageTransitionType.fade,
-                                          duration: Duration(milliseconds: 0),
-                                        ),
-                                      },
-                                    );
-                                  },
-                                  child: Container(
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          blurRadius: 4.0,
-                                          color: Color(0x1A000000),
-                                          offset: Offset(
-                                            0.0,
-                                            2.0,
-                                          ),
-                                        )
-                                      ],
-                                      borderRadius: BorderRadius.circular(12.0),
+                        return ListView.separated(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          itemCount: ccc.length,
+                          separatorBuilder: (_, __) => SizedBox(height: 10.0),
+                          itemBuilder: (context, cccIndex) {
+                            final cccItem = ccc[cccIndex];
+                            return InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                context.pushNamed(
+                                  ScholarshipDetailsWidget.routeName,
+                                  queryParameters: {
+                                    'slug': serializeParam(
+                                      getJsonField(
+                                        cccItem,
+                                        r'''$.slug''',
+                                      ).toString(),
+                                      ParamType.String,
                                     ),
-                                    child: Padding(
-                                      padding: EdgeInsets.all(16.0),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(12.0),
-                                            child: CachedNetworkImage(
-                                              fadeInDuration:
-                                                  Duration(milliseconds: 200),
-                                              fadeOutDuration:
-                                                  Duration(milliseconds: 200),
-                                              imageUrl: getJsonField(
-                                                resultsItem,
-                                                r'''$.Scholarship_image''',
-                                              ).toString(),
-                                              width: double.infinity,
-                                              height: 100.0,
-                                              fit: BoxFit.contain,
-                                              alignment: Alignment(-1.0, 0.0),
-                                              errorWidget: (context, error,
-                                                      stackTrace) =>
+                                  }.withoutNulls,
+                                  extra: <String, dynamic>{
+                                    kTransitionInfoKey: TransitionInfo(
+                                      hasTransition: true,
+                                      transitionType: PageTransitionType.fade,
+                                      duration: Duration(milliseconds: 0),
+                                    ),
+                                  },
+                                );
+                              },
+                              child: Container(
+                                width: double.infinity,
+                                height: 260.0,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 4.0,
+                                      color: Color(0x1A000000),
+                                      offset: Offset(
+                                        0.0,
+                                        2.0,
+                                      ),
+                                    )
+                                  ],
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.all(10.0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
+                                        child: CachedNetworkImage(
+                                          fadeInDuration:
+                                              Duration(milliseconds: 200),
+                                          fadeOutDuration:
+                                              Duration(milliseconds: 200),
+                                          imageUrl: getJsonField(
+                                            cccItem,
+                                            r'''$.Scholarship_image''',
+                                          ).toString(),
+                                          width: double.infinity,
+                                          height: 100.0,
+                                          fit: BoxFit.contain,
+                                          alignment: Alignment(-1.0, 0.0),
+                                          errorWidget:
+                                              (context, error, stackTrace) =>
                                                   Image.asset(
-                                                'assets/images/error_image.gif',
-                                                width: double.infinity,
-                                                height: 100.0,
-                                                fit: BoxFit.contain,
-                                                alignment: Alignment(-1.0, 0.0),
-                                              ),
-                                            ),
+                                            'assets/images/error_image.gif',
+                                            width: double.infinity,
+                                            height: 100.0,
+                                            fit: BoxFit.contain,
+                                            alignment: Alignment(-1.0, 0.0),
                                           ),
-                                          Padding(
-                                            padding: EdgeInsets.all(16.0),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  getJsonField(
-                                                    resultsItem,
-                                                    r'''$.name''',
-                                                  ).toString(),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .titleMedium
-                                                      .override(
-                                                        font: GoogleFonts
-                                                            .interTight(
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleMedium
-                                                                  .fontStyle,
-                                                        ),
-                                                        fontSize: 18.0,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .titleMedium
-                                                                .fontStyle,
-                                                      ),
-                                                ),
-                                                Builder(
-                                                  builder: (context) {
-                                                    final degree = getJsonField(
-                                                      resultsItem,
-                                                      r'''$.degree''',
-                                                    ).toList().take(4).toList();
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.all(16.0),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              getJsonField(
+                                                cccItem,
+                                                r'''$.name''',
+                                              ).toString(),
+                                              maxLines: 2,
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .titleMedium
+                                                  .override(
+                                                    font:
+                                                        GoogleFonts.interTight(
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleMedium
+                                                              .fontStyle,
+                                                    ),
+                                                    fontSize: 18.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleMedium
+                                                            .fontStyle,
+                                                  ),
+                                            ),
+                                            Builder(
+                                              builder: (context) {
+                                                final degree = getJsonField(
+                                                  cccItem,
+                                                  r'''$.degree''',
+                                                ).toList().take(4).toList();
 
-                                                    return Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: List.generate(
-                                                          degree.length,
-                                                          (degreeIndex) {
-                                                        final degreeItem =
-                                                            degree[degreeIndex];
-                                                        return Container(
-                                                          width: 80.0,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .secondaryText,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        4.0),
-                                                          ),
-                                                          child: Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        8.0,
-                                                                        4.0,
-                                                                        8.0,
-                                                                        4.0),
-                                                            child: AutoSizeText(
-                                                              degreeItem
-                                                                  .toString(),
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .center,
-                                                              maxLines: 1,
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodySmall
-                                                                  .override(
-                                                                    font: GoogleFonts
-                                                                        .inter(
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w600,
-                                                                      fontStyle: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodySmall
-                                                                          .fontStyle,
-                                                                    ),
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryBackground,
-                                                                    letterSpacing:
-                                                                        0.0,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    fontStyle: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodySmall
-                                                                        .fontStyle,
-                                                                  ),
-                                                            ),
-                                                          ),
-                                                        );
-                                                      }).divide(
-                                                          SizedBox(width: 8.0)),
-                                                    );
-                                                  },
-                                                ),
-                                                Row(
+                                                return Row(
                                                   mainAxisSize:
                                                       MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                      'Country: ${getJsonField(
-                                                        resultsItem,
-                                                        r'''$.country''',
-                                                      ).toString()}',
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .bodySmall
-                                                          .override(
-                                                            font: GoogleFonts
-                                                                .inter(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w800,
-                                                              fontStyle:
-                                                                  FlutterFlowTheme.of(
+                                                  children: List.generate(
+                                                      degree.length,
+                                                      (degreeIndex) {
+                                                    final degreeItem =
+                                                        degree[degreeIndex];
+                                                    return Container(
+                                                      width: 80.0,
+                                                      decoration: BoxDecoration(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4.0),
+                                                      ),
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    8.0,
+                                                                    4.0,
+                                                                    8.0,
+                                                                    4.0),
+                                                        child: AutoSizeText(
+                                                          degreeItem.toString(),
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          maxLines: 1,
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodySmall
+                                                              .override(
+                                                                font:
+                                                                    GoogleFonts
+                                                                        .inter(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  fontStyle: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodySmall
                                                                       .fontStyle,
-                                                            ),
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primary,
-                                                            letterSpacing: 0.0,
-                                                            fontWeight:
-                                                                FontWeight.w800,
-                                                            fontStyle:
-                                                                FlutterFlowTheme.of(
+                                                                ),
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryBackground,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                fontStyle: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodySmall
                                                                     .fontStyle,
-                                                          ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ].divide(SizedBox(height: 8.0)),
+                                                              ),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }).divide(
+                                                      SizedBox(width: 8.0)),
+                                                );
+                                              },
                                             ),
-                                          ),
-                                        ],
+                                            Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  'Country: ${getJsonField(
+                                                    cccItem,
+                                                    r'''$.country''',
+                                                  ).toString()}',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodySmall
+                                                      .override(
+                                                        font:
+                                                            GoogleFonts.roboto(
+                                                          fontWeight:
+                                                              FontWeight.w800,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodySmall
+                                                                  .fontStyle,
+                                                        ),
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primary,
+                                                        fontSize: 14.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.w800,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodySmall
+                                                                .fontStyle,
+                                                      ),
+                                                ),
+                                              ],
+                                            ),
+                                          ].divide(SizedBox(height: 8.0)),
+                                        ),
                                       ),
-                                    ),
+                                    ],
                                   ),
-                                );
-                              },
-                            ).animateOnActionTrigger(
-                              animationsMap[
-                                  'listViewOnActionTriggerAnimation']!,
+                                ),
+                              ),
                             );
                           },
-                        ),
-                      ),
+                        );
+                      },
                     ),
                   ),
-                if (FFAppState().loading == true)
-                  Lottie.asset(
-                    'assets/jsons/loader.json',
-                    width: 200.0,
-                    height: 200.0,
-                    fit: BoxFit.contain,
-                    animate: true,
-                  ),
+                ),
               ].divide(SizedBox(height: 16.0)),
             ),
           ),
