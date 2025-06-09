@@ -86,16 +86,17 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                         ),
                         child: Padding(
                           padding: EdgeInsets.all(4.0),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(50.0),
-                            child: CachedNetworkImage(
-                              fadeInDuration: Duration(milliseconds: 500),
-                              fadeOutDuration: Duration(milliseconds: 500),
-                              imageUrl:
-                                  'https://images.unsplash.com/photo-1489980557514-251d61e3eeb6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OTZ8fHByb2ZpbGV8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60',
-                              width: 100.0,
-                              height: 100.0,
-                              fit: BoxFit.cover,
+                          child: AuthUserStreamWidget(
+                            builder: (context) => ClipRRect(
+                              borderRadius: BorderRadius.circular(50.0),
+                              child: CachedNetworkImage(
+                                fadeInDuration: Duration(milliseconds: 500),
+                                fadeOutDuration: Duration(milliseconds: 500),
+                                imageUrl: currentUserPhoto,
+                                width: 100.0,
+                                height: 100.0,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),
@@ -107,10 +108,19 @@ class _SettingsWidgetState extends State<SettingsWidget> {
             ),
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
-              child: Text(
-                'Thomas L',
-                style: FlutterFlowTheme.of(context).headlineLarge.override(
-                      font: GoogleFonts.interTight(
+              child: AuthUserStreamWidget(
+                builder: (context) => Text(
+                  currentUserDisplayName,
+                  style: FlutterFlowTheme.of(context).headlineLarge.override(
+                        font: GoogleFonts.interTight(
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .headlineLarge
+                              .fontWeight,
+                          fontStyle: FlutterFlowTheme.of(context)
+                              .headlineLarge
+                              .fontStyle,
+                        ),
+                        letterSpacing: 0.0,
                         fontWeight: FlutterFlowTheme.of(context)
                             .headlineLarge
                             .fontWeight,
@@ -118,18 +128,13 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                             .headlineLarge
                             .fontStyle,
                       ),
-                      letterSpacing: 0.0,
-                      fontWeight:
-                          FlutterFlowTheme.of(context).headlineLarge.fontWeight,
-                      fontStyle:
-                          FlutterFlowTheme.of(context).headlineLarge.fontStyle,
-                    ),
+                ),
               ),
             ),
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(24.0, 4.0, 0.0, 16.0),
               child: Text(
-                'lukenyanja@gmail.com',
+                currentUserEmail,
                 style: FlutterFlowTheme.of(context).labelMedium.override(
                       font: GoogleFonts.inter(
                         fontWeight:

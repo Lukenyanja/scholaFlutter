@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 
 import '/flutter_flow/flutter_flow_util.dart';
@@ -19,6 +20,7 @@ class ScholarshipsGroup {
   static GetCountriesCall getCountriesCall = GetCountriesCall();
   static GetCountryScholarshipsCall getCountryScholarshipsCall =
       GetCountryScholarshipsCall();
+  static MultiFilterCall multiFilterCall = MultiFilterCall();
 }
 
 class GetScholarshipsCall {
@@ -134,6 +136,30 @@ class GetCountryScholarshipsCall {
   }
 }
 
+class MultiFilterCall {
+  Future<ApiCallResponse> call({
+    String? item = 'country',
+    String? value = 'value',
+  }) async {
+    final baseUrl = ScholarshipsGroup.getBaseUrl();
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'MultiFilter',
+      apiUrl:
+          '${baseUrl}/api/scholarships/filter/scholarships_Mgr_filter?${item}=${value}',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 /// End scholarships Group Code
 
 /// Start AI webhook Group Code
@@ -203,6 +229,9 @@ class ApiPagingParams {
 }
 
 String _toEncodable(dynamic item) {
+  if (item is DocumentReference) {
+    return item.path;
+  }
   return item;
 }
 

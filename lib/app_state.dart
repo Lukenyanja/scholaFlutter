@@ -31,4 +31,39 @@ class FFAppState extends ChangeNotifier {
   set Qn(String value) {
     _Qn = value;
   }
+
+  bool _loading = false;
+  bool get loading => _loading;
+  set loading(bool value) {
+    _loading = value;
+  }
+
+  List<dynamic> _scholarsipsFetched = [];
+  List<dynamic> get scholarsipsFetched => _scholarsipsFetched;
+  set scholarsipsFetched(List<dynamic> value) {
+    _scholarsipsFetched = value;
+  }
+
+  void addToScholarsipsFetched(dynamic value) {
+    scholarsipsFetched.add(value);
+  }
+
+  void removeFromScholarsipsFetched(dynamic value) {
+    scholarsipsFetched.remove(value);
+  }
+
+  void removeAtIndexFromScholarsipsFetched(int index) {
+    scholarsipsFetched.removeAt(index);
+  }
+
+  void updateScholarsipsFetchedAtIndex(
+    int index,
+    dynamic Function(dynamic) updateFn,
+  ) {
+    scholarsipsFetched[index] = updateFn(_scholarsipsFetched[index]);
+  }
+
+  void insertAtIndexInScholarsipsFetched(int index, dynamic value) {
+    scholarsipsFetched.insert(index, value);
+  }
 }
