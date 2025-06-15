@@ -385,7 +385,7 @@ class _ScholarshipDetailsWidgetState extends State<ScholarshipDetailsWidget> {
                                           CrossAxisAlignment.end,
                                       children: [
                                         Text(
-                                          'Award Amount',
+                                          'Location',
                                           style: FlutterFlowTheme.of(context)
                                               .titleMedium
                                               .override(
@@ -406,7 +406,11 @@ class _ScholarshipDetailsWidgetState extends State<ScholarshipDetailsWidget> {
                                               ),
                                         ),
                                         Text(
-                                          '50,000,000/= per year',
+                                          getJsonField(
+                                            scholarshipDetailsGetScholarshipDetailsResponse
+                                                .jsonBody,
+                                            r'''$.country''',
+                                          ).toString(),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
@@ -445,7 +449,7 @@ class _ScholarshipDetailsWidgetState extends State<ScholarshipDetailsWidget> {
                                   color: FlutterFlowTheme.of(context).alternate,
                                 ),
                                 Text(
-                                  'Eligibility Requirements',
+                                  'Degree levels ',
                                   style: FlutterFlowTheme.of(context)
                                       .titleMedium
                                       .override(
@@ -463,191 +467,77 @@ class _ScholarshipDetailsWidgetState extends State<ScholarshipDetailsWidget> {
                                             .fontStyle,
                                       ),
                                 ),
-                                Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
+                                Builder(
+                                  builder: (context) {
+                                    final degreeLevels = getJsonField(
+                                      scholarshipDetailsGetScholarshipDetailsResponse
+                                          .jsonBody,
+                                      r'''$.degree''',
+                                    ).toList().take(5).toList();
+
+                                    return Column(
                                       mainAxisSize: MainAxisSize.max,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
-                                      children: [
-                                        Icon(
-                                          Icons.check_circle_outlined,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          size: 20.0,
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            'Minimum GPA of 3.5 or equivalent',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  font: GoogleFonts.inter(
-                                                    fontWeight:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .fontWeight,
-                                                    fontStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .fontStyle,
-                                                  ),
-                                                  letterSpacing: 0.0,
-                                                  fontWeight:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .fontWeight,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .fontStyle,
-                                                ),
-                                          ),
-                                        ),
-                                      ].divide(SizedBox(width: 8.0)),
-                                    ),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Icon(
-                                          Icons.check_circle_outlined,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          size: 20.0,
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            'Demonstrated leadership experience',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  font: GoogleFonts.inter(
-                                                    fontWeight:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .fontWeight,
-                                                    fontStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .fontStyle,
-                                                  ),
-                                                  letterSpacing: 0.0,
-                                                  fontWeight:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .fontWeight,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .fontStyle,
-                                                ),
-                                          ),
-                                        ),
-                                      ].divide(SizedBox(width: 8.0)),
-                                    ),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Icon(
-                                          Icons.check_circle_outlined,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          size: 20.0,
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            'International student status',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  font: GoogleFonts.inter(
-                                                    fontWeight:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .fontWeight,
-                                                    fontStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .fontStyle,
-                                                  ),
-                                                  letterSpacing: 0.0,
-                                                  fontWeight:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .fontWeight,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .fontStyle,
-                                                ),
-                                          ),
-                                        ),
-                                      ].divide(SizedBox(width: 8.0)),
-                                    ),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Icon(
-                                          Icons.check_circle_outlined,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          size: 20.0,
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            'Acceptance to an eligible program',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  font: GoogleFonts.inter(
-                                                    fontWeight:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .fontWeight,
-                                                    fontStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .fontStyle,
-                                                  ),
-                                                  letterSpacing: 0.0,
-                                                  fontWeight:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .fontWeight,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .fontStyle,
-                                                ),
-                                          ),
-                                        ),
-                                      ].divide(SizedBox(width: 8.0)),
-                                    ),
-                                  ].divide(SizedBox(height: 8.0)),
+                                      children:
+                                          List.generate(degreeLevels.length,
+                                              (degreeLevelsIndex) {
+                                        final degreeLevelsItem =
+                                            degreeLevels[degreeLevelsIndex];
+                                        return Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Icon(
+                                              Icons.check_circle_outlined,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              size: 20.0,
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                getJsonField(
+                                                  degreeLevelsItem,
+                                                  r'''$''',
+                                                ).toString(),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          font:
+                                                              GoogleFonts.inter(
+                                                            fontWeight:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontWeight,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                          ),
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
+                                                        ),
+                                              ),
+                                            ),
+                                          ].divide(SizedBox(width: 8.0)),
+                                        );
+                                      }).divide(SizedBox(height: 8.0)),
+                                    );
+                                  },
                                 ),
                                 Divider(
                                   thickness: 1.0,
@@ -673,7 +563,11 @@ class _ScholarshipDetailsWidgetState extends State<ScholarshipDetailsWidget> {
                                       ),
                                 ),
                                 Text(
-                                  'The Global Excellence Scholarship is designed to recognize and support outstanding international students who demonstrate exceptional academic achievement and leadership potential. Recipients will receive full tuition coverage for the duration of their undergraduate or graduate program, renewable annually based on maintaining academic standards.',
+                                  getJsonField(
+                                    scholarshipDetailsGetScholarshipDetailsResponse
+                                        .jsonBody,
+                                    r'''$.description''',
+                                  ).toString(),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -731,7 +625,7 @@ class _ScholarshipDetailsWidgetState extends State<ScholarshipDetailsWidget> {
                                   color: FlutterFlowTheme.of(context).alternate,
                                 ),
                                 Text(
-                                  'Application Process',
+                                  'Benefits',
                                   style: FlutterFlowTheme.of(context)
                                       .titleMedium
                                       .override(
@@ -750,7 +644,11 @@ class _ScholarshipDetailsWidgetState extends State<ScholarshipDetailsWidget> {
                                       ),
                                 ),
                                 Text(
-                                  '1. Complete the online application form\n2. Submit academic transcripts\n3. Provide two letters of recommendation\n4. Write a personal statement (500-750 words)\n5. Submit proof of English language proficiency\n6. Participate in an interview (if shortlisted)',
+                                  getJsonField(
+                                    scholarshipDetailsGetScholarshipDetailsResponse
+                                        .jsonBody,
+                                    r'''$.benefits''',
+                                  ).toString(),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -810,7 +708,12 @@ class _ScholarshipDetailsWidgetState extends State<ScholarshipDetailsWidget> {
                                       size: 20.0,
                                     ),
                                     Text(
-                                      'scholarships@university.edu',
+                                      getJsonField(
+                                        scholarshipDetailsGetScholarshipDetailsResponse
+                                            .jsonBody,
+                                        r'''$.application_link''',
+                                      ).toString(),
+                                      maxLines: 3,
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
@@ -826,46 +729,6 @@ class _ScholarshipDetailsWidgetState extends State<ScholarshipDetailsWidget> {
                                             ),
                                             color: FlutterFlowTheme.of(context)
                                                 .primary,
-                                            letterSpacing: 0.0,
-                                            fontWeight:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .fontWeight,
-                                            fontStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .fontStyle,
-                                          ),
-                                    ),
-                                  ].divide(SizedBox(width: 8.0)),
-                                ),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Icon(
-                                      Icons.phone_outlined,
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      size: 20.0,
-                                    ),
-                                    Text(
-                                      '+1 (555) 123-4567',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            font: GoogleFonts.inter(
-                                              fontWeight:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .fontWeight,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .fontStyle,
-                                            ),
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
                                             letterSpacing: 0.0,
                                             fontWeight:
                                                 FlutterFlowTheme.of(context)
@@ -904,8 +767,12 @@ class _ScholarshipDetailsWidgetState extends State<ScholarshipDetailsWidget> {
                               borderRadius: BorderRadius.circular(0.0),
                             ),
                             child: FFButtonWidget(
-                              onPressed: () {
-                                print('Button pressed ...');
+                              onPressed: () async {
+                                await launchURL(getJsonField(
+                                  scholarshipDetailsGetScholarshipDetailsResponse
+                                      .jsonBody,
+                                  r'''$.application_link''',
+                                ).toString());
                               },
                               text: 'Apply Now',
                               options: FFButtonOptions(

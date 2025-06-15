@@ -138,15 +138,15 @@ class GetCountryScholarshipsCall {
 
 class MultiFilterCall {
   Future<ApiCallResponse> call({
-    String? item = 'country',
-    String? value = 'value',
+    String? categoryS = 'funding_status',
+    String? valueS = 'stipend',
   }) async {
     final baseUrl = ScholarshipsGroup.getBaseUrl();
 
     return ApiManager.instance.makeApiCall(
       callName: 'MultiFilter',
       apiUrl:
-          '${baseUrl}/api/scholarships/filter/scholarships_Mgr_filter?${item}=${value}',
+          '${baseUrl}/api/scholarships/filter/scholarships_Mgr_filter?${categoryS}=${valueS}',
       callType: ApiCallType.GET,
       headers: {},
       params: {},

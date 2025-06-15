@@ -1405,7 +1405,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                     listViewGetCountriesResponse
                                                         .jsonBody,
                                                     r'''$''',
-                                                  ).toList();
+                                                  ).toList().take(30).toList();
 
                                                   return ListView.builder(
                                                     padding: EdgeInsets.zero,
