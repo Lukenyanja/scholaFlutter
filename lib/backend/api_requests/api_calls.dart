@@ -21,6 +21,7 @@ class ScholarshipsGroup {
   static GetCountryScholarshipsCall getCountryScholarshipsCall =
       GetCountryScholarshipsCall();
   static MultiFilterCall multiFilterCall = MultiFilterCall();
+  static GetSubjectsCall getSubjectsCall = GetSubjectsCall();
 }
 
 class GetScholarshipsCall {
@@ -150,6 +151,28 @@ class MultiFilterCall {
       callType: ApiCallType.GET,
       headers: {},
       params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class GetSubjectsCall {
+  Future<ApiCallResponse> call() async {
+    final baseUrl = ScholarshipsGroup.getBaseUrl();
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'GetSubjects',
+      apiUrl: '${baseUrl}/api/courses/subject_details/list',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {
+        'popular': true,
+      },
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,

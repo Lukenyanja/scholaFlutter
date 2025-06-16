@@ -34,3 +34,4 @@ export '/account_profile_creation2/auth_2_profile/auth2_profile_widget.dart'
     show Auth2ProfileWidget;
 export '/account_profile_creation2/auth_2_edit_profile/auth2_edit_profile_widget.dart'
     show Auth2EditProfileWidget;
+export '/otherpages/subjects/subjects_widget.dart' show SubjectsWidget;

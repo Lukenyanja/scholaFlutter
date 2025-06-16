@@ -534,39 +534,55 @@ class _Auth2LoginWidgetState extends State<Auth2LoginWidget>
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 16.0),
-                              child: FFButtonWidget(
-                                onPressed: () async {
-                                  GoRouter.of(context).prepareAuthEvent();
-                                  final user = await authManager
-                                      .signInWithGoogle(context);
-                                  if (user == null) {
-                                    return;
-                                  }
+                            if (responsiveVisibility(
+                              context: context,
+                              phone: false,
+                            ))
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 16.0),
+                                child: FFButtonWidget(
+                                  onPressed: () async {
+                                    GoRouter.of(context).prepareAuthEvent();
+                                    final user = await authManager
+                                        .signInWithGoogle(context);
+                                    if (user == null) {
+                                      return;
+                                    }
 
-                                  context.goNamedAuth(
-                                      HomeWidget.routeName, context.mounted);
-                                },
-                                text: 'Continue with Google',
-                                icon: FaIcon(
-                                  FontAwesomeIcons.google,
-                                  size: 20.0,
-                                ),
-                                options: FFButtonOptions(
-                                  width: double.infinity,
-                                  height: 44.0,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .override(
-                                        font: GoogleFonts.interTight(
+                                    context.goNamedAuth(
+                                        HomeWidget.routeName, context.mounted);
+                                  },
+                                  text: 'Continue with Google',
+                                  icon: FaIcon(
+                                    FontAwesomeIcons.google,
+                                    size: 20.0,
+                                  ),
+                                  options: FFButtonOptions(
+                                    width: double.infinity,
+                                    height: 44.0,
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          font: GoogleFonts.interTight(
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .fontStyle,
+                                          ),
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          letterSpacing: 0.0,
                                           fontWeight:
                                               FlutterFlowTheme.of(context)
                                                   .titleSmall
@@ -576,65 +592,77 @@ class _Auth2LoginWidgetState extends State<Auth2LoginWidget>
                                                   .titleSmall
                                                   .fontStyle,
                                         ),
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .fontStyle,
-                                      ),
-                                  elevation: 0.0,
-                                  borderSide: BorderSide(
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    width: 2.0,
+                                    elevation: 0.0,
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context)
+                                          .alternate,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(12.0),
+                                    hoverColor: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
                                   ),
-                                  borderRadius: BorderRadius.circular(12.0),
-                                  hoverColor: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
                                 ),
                               ),
-                            ),
-                            isAndroid
-                                ? Container()
-                                : Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 16.0),
-                                    child: FFButtonWidget(
-                                      onPressed: () async {
-                                        GoRouter.of(context).prepareAuthEvent();
-                                        final user = await authManager
-                                            .signInWithApple(context);
-                                        if (user == null) {
-                                          return;
-                                        }
+                            if (responsiveVisibility(
+                              context: context,
+                              phone: false,
+                            ))
+                              isAndroid
+                                  ? Container()
+                                  : Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 16.0),
+                                      child: FFButtonWidget(
+                                        onPressed: () async {
+                                          GoRouter.of(context)
+                                              .prepareAuthEvent();
+                                          final user = await authManager
+                                              .signInWithApple(context);
+                                          if (user == null) {
+                                            return;
+                                          }
 
-                                        context.goNamedAuth(
-                                            HomeWidget.routeName,
-                                            context.mounted);
-                                      },
-                                      text: 'Continue with Apple',
-                                      icon: FaIcon(
-                                        FontAwesomeIcons.apple,
-                                        size: 20.0,
-                                      ),
-                                      options: FFButtonOptions(
-                                        width: double.infinity,
-                                        height: 44.0,
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 0.0),
-                                        iconPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                0.0, 0.0, 0.0, 0.0),
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .override(
-                                              font: GoogleFonts.interTight(
+                                          context.goNamedAuth(
+                                              HomeWidget.routeName,
+                                              context.mounted);
+                                        },
+                                        text: 'Continue with Apple',
+                                        icon: FaIcon(
+                                          FontAwesomeIcons.apple,
+                                          size: 20.0,
+                                        ),
+                                        options: FFButtonOptions(
+                                          width: double.infinity,
+                                          height: 44.0,
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                          iconPadding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .titleSmall
+                                              .override(
+                                                font: GoogleFonts.interTight(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleSmall
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleSmall
+                                                          .fontStyle,
+                                                ),
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                letterSpacing: 0.0,
                                                 fontWeight:
                                                     FlutterFlowTheme.of(context)
                                                         .titleSmall
@@ -644,32 +672,20 @@ class _Auth2LoginWidgetState extends State<Auth2LoginWidget>
                                                         .titleSmall
                                                         .fontStyle,
                                               ),
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              letterSpacing: 0.0,
-                                              fontWeight:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmall
-                                                      .fontWeight,
-                                              fontStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmall
-                                                      .fontStyle,
-                                            ),
-                                        elevation: 0.0,
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .alternate,
-                                          width: 2.0,
+                                          elevation: 0.0,
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .alternate,
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
+                                          hoverColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryBackground,
                                         ),
-                                        borderRadius:
-                                            BorderRadius.circular(12.0),
-                                        hoverColor: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
                                       ),
                                     ),
-                                  ),
 
                             // You will have to add an action on this rich text to go to your login page.
                             Align(

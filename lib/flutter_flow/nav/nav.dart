@@ -212,6 +212,20 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: Auth2EditProfileWidget.routeName,
           path: Auth2EditProfileWidget.routePath,
           builder: (context, params) => Auth2EditProfileWidget(),
+        ),
+        FFRoute(
+          name: SubjectsWidget.routeName,
+          path: SubjectsWidget.routePath,
+          builder: (context, params) => SubjectsWidget(
+            queryName: params.getParam(
+              'queryName',
+              ParamType.String,
+            ),
+            imageHeader: params.getParam(
+              'imageHeader',
+              ParamType.String,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
