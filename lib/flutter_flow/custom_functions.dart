@@ -30,3 +30,29 @@ dynamic convertToJSON(String prompt) {
   // take the prompt and return a JSON with form [{"role": "user", "content": prompt}]
   return json.decode('{"role": "user", "content": "$prompt"}');
 }
+
+String? newCustomFunction(
+  String? input,
+  String? find,
+  String? replace,
+) {
+  String replaceAll(String input, String find, String replaceWith) {
+    return input.replaceAll(find, replaceWith);
+  }
+}
+
+String? replaceAll(
+  String? input,
+  String? find,
+  String? replaceWith,
+) {
+  String replaceAllAdvanced(
+      String input, String pattern, String replaceWith, bool caseInsensitive) {
+    final regex = RegExp(
+      pattern,
+      caseSensitive: !caseInsensitive,
+      multiLine: false,
+    );
+    return input.replaceAll(regex, '');
+  }
+}

@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -426,8 +427,12 @@ class _CategoriesWidgetState extends State<CategoriesWidget>
                                                   topRight:
                                                       Radius.circular(4.0),
                                                 ),
-                                                child: Image.network(
-                                                  getJsonField(
+                                                child: CachedNetworkImage(
+                                                  fadeInDuration: Duration(
+                                                      milliseconds: 500),
+                                                  fadeOutDuration: Duration(
+                                                      milliseconds: 500),
+                                                  imageUrl: getJsonField(
                                                     cntrySchlarshipsItem,
                                                     r'''$.Scholarship_image''',
                                                   ).toString(),
@@ -437,6 +442,17 @@ class _CategoriesWidgetState extends State<CategoriesWidget>
                                                               .height *
                                                           1.0,
                                                   fit: BoxFit.contain,
+                                                  errorWidget: (context, error,
+                                                          stackTrace) =>
+                                                      Image.asset(
+                                                    'assets/images/error_image.gif',
+                                                    width: 100.0,
+                                                    height: MediaQuery.sizeOf(
+                                                                context)
+                                                            .height *
+                                                        1.0,
+                                                    fit: BoxFit.contain,
+                                                  ),
                                                 ),
                                               ),
                                               Padding(

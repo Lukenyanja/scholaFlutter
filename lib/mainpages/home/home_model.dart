@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'home_widget.dart' show HomeWidget;
@@ -10,6 +11,8 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
+  // Stores action output result for [Backend Call - API (Search)] action in IconButton widget.
+  ApiCallResponse? searchfiltered;
 
   @override
   void initState(BuildContext context) {}

@@ -451,16 +451,24 @@ class _Auth2LoginWidgetState extends State<Auth2LoginWidget>
                                     return;
                                   }
 
-                                  context.pushNamedAuth(
-                                    HomeWidget.routeName,
-                                    context.mounted,
-                                    extra: <String, dynamic>{
-                                      kTransitionInfoKey: TransitionInfo(
-                                        hasTransition: true,
-                                        transitionType: PageTransitionType.fade,
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'loggedIn',
+                                        style: TextStyle(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                        ),
                                       ),
-                                    },
+                                      duration: Duration(milliseconds: 4000),
+                                      backgroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .secondary,
+                                    ),
                                   );
+
+                                  context.goNamedAuth(
+                                      HomeWidget.routeName, context.mounted);
                                 },
                                 text: 'Sign In',
                                 options: FFButtonOptions(
@@ -502,18 +510,32 @@ class _Auth2LoginWidgetState extends State<Auth2LoginWidget>
                                 ),
                               ),
                             ),
-                            Align(
-                              alignment: AlignmentDirectional(0.0, 0.0),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 16.0, 24.0),
-                                child: Text(
-                                  'Or sign in with',
-                                  textAlign: TextAlign.center,
-                                  style: FlutterFlowTheme.of(context)
-                                      .labelMedium
-                                      .override(
-                                        font: GoogleFonts.inter(
+                            if (responsiveVisibility(
+                              context: context,
+                              phone: false,
+                            ))
+                              Align(
+                                alignment: AlignmentDirectional(0.0, 0.0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 0.0, 16.0, 24.0),
+                                  child: Text(
+                                    'Or sign in with',
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .override(
+                                          font: GoogleFonts.inter(
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelMedium
+                                                    .fontStyle,
+                                          ),
+                                          letterSpacing: 0.0,
                                           fontWeight:
                                               FlutterFlowTheme.of(context)
                                                   .labelMedium
@@ -523,17 +545,9 @@ class _Auth2LoginWidgetState extends State<Auth2LoginWidget>
                                                   .labelMedium
                                                   .fontStyle,
                                         ),
-                                        letterSpacing: 0.0,
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .labelMedium
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium
-                                            .fontStyle,
-                                      ),
+                                  ),
                                 ),
                               ),
-                            ),
                             if (responsiveVisibility(
                               context: context,
                               phone: false,

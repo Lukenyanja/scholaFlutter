@@ -22,6 +22,8 @@ class ScholarshipsGroup {
       GetCountryScholarshipsCall();
   static MultiFilterCall multiFilterCall = MultiFilterCall();
   static GetSubjectsCall getSubjectsCall = GetSubjectsCall();
+  static SearchCall searchCall = SearchCall();
+  static SearchCopyCall searchCopyCall = SearchCopyCall();
 }
 
 class GetScholarshipsCall {
@@ -173,6 +175,52 @@ class GetSubjectsCall {
       params: {
         'popular': true,
       },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class SearchCall {
+  Future<ApiCallResponse> call({
+    String? searchTerm = 'canada',
+  }) async {
+    final baseUrl = ScholarshipsGroup.getBaseUrl();
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'Search',
+      apiUrl:
+          '${baseUrl}/api/scholarships/scholarship/list?search=${searchTerm}',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class SearchCopyCall {
+  Future<ApiCallResponse> call({
+    String? searchTerm = 'canada',
+  }) async {
+    final baseUrl = ScholarshipsGroup.getBaseUrl();
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'Search Copy',
+      apiUrl:
+          '${baseUrl}/api/scholarships/search/text-similarity/?query=${searchTerm}',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,

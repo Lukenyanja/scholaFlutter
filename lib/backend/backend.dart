@@ -6,6 +6,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import 'schema/util/firestore_util.dart';
 
 import 'schema/quiz_questions_record.dart';
+import 'schema/users_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -15,6 +16,7 @@ export 'schema/util/firestore_util.dart';
 export 'schema/util/schema_util.dart';
 
 export 'schema/quiz_questions_record.dart';
+export 'schema/users_record.dart';
 
 /// Functions to query QuizQuestionsRecords (as a Stream and as a Future).
 Future<int> queryQuizQuestionsRecordCount({
@@ -48,6 +50,43 @@ Future<List<QuizQuestionsRecord>> queryQuizQuestionsRecordOnce({
     queryCollectionOnce(
       QuizQuestionsRecord.collection,
       QuizQuestionsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query UsersRecords (as a Stream and as a Future).
+Future<int> queryUsersRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      UsersRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<UsersRecord>> queryUsersRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      UsersRecord.collection,
+      UsersRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<UsersRecord>> queryUsersRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      UsersRecord.collection,
+      UsersRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
@@ -190,14 +229,14 @@ Future<FFFirestorePage<T>> queryCollectionPage<T>(
 
 // Creates a Firestore document representing the logged in user if it doesn't yet exist
 Future maybeCreateUser(User user) async {
-  final userRecord = QuizQuestionsRecord.collection.doc(user.uid);
+  final userRecord = UsersRecord.collection.doc(user.uid);
   final userExists = await userRecord.get().then((u) => u.exists);
   if (userExists) {
-    currentUserDocument = await QuizQuestionsRecord.getDocumentOnce(userRecord);
+    currentUserDocument = await UsersRecord.getDocumentOnce(userRecord);
     return;
   }
 
-  final userData = createQuizQuestionsRecordData(
+  final userData = createUsersRecordData(
     email: user.email ??
         FirebaseAuth.instance.currentUser?.email ??
         user.providerData.firstOrNull?.email,
@@ -210,11 +249,10 @@ Future maybeCreateUser(User user) async {
   );
 
   await userRecord.set(userData);
-  currentUserDocument =
-      QuizQuestionsRecord.getDocumentFromData(userData, userRecord);
+  currentUserDocument = UsersRecord.getDocumentFromData(userData, userRecord);
 }
 
 Future updateUserDocument({String? email}) async {
   await currentUserDocument?.reference
-      .update(createQuizQuestionsRecordData(email: email));
+      .update(createUsersRecordData(email: email));
 }

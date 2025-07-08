@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -409,8 +410,34 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                       color: FlutterFlowTheme.of(context).info,
                                       size: 24.0,
                                     ),
-                                    onPressed: () {
-                                      print('IconButton pressed ...');
+                                    onPressed: () async {
+                                      FFAppState().loading = true;
+                                      safeSetState(() {});
+                                      _model.searchfiltered =
+                                          await ScholarshipsGroup.searchCall
+                                              .call(
+                                        searchTerm: _model.textController.text,
+                                      );
+
+                                      FFAppState().scholarsipsFetched =
+                                          (_model.searchfiltered?.jsonBody ??
+                                              '');
+                                      safeSetState(() {});
+                                      FFAppState().loading = false;
+                                      safeSetState(() {});
+
+                                      context.pushNamed(
+                                        ScholarshipfinderWidget.routeName,
+                                        extra: <String, dynamic>{
+                                          kTransitionInfoKey: TransitionInfo(
+                                            hasTransition: true,
+                                            transitionType:
+                                                PageTransitionType.fade,
+                                          ),
+                                        },
+                                      );
+
+                                      safeSetState(() {});
                                     },
                                   ),
                                 ].divide(SizedBox(width: 3.0)),
@@ -620,13 +647,13 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                                   DecorationImage(
                                                                 fit: BoxFit
                                                                     .cover,
-                                                                image: Image
-                                                                    .network(
+                                                                image:
+                                                                    CachedNetworkImageProvider(
                                                                   getJsonField(
                                                                     topPicksItem,
                                                                     r'''$.subject_image''',
                                                                   ).toString(),
-                                                                ).image,
+                                                                ),
                                                               ),
                                                               boxShadow: [
                                                                 BoxShadow(

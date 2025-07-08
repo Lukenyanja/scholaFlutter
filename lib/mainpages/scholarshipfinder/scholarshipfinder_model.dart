@@ -9,11 +9,11 @@ class ScholarshipfinderModel extends FlutterFlowModel<ScholarshipfinderWidget> {
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for TextField widget.
-  final textFieldKey = GlobalKey();
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
-  String? textFieldSelectedOption;
   String? Function(BuildContext, String?)? textControllerValidator;
+  // Stores action output result for [Backend Call - API (Search)] action in IconButton widget.
+  ApiCallResponse? searchfiltered;
   // State field(s) for Degrees widget.
   String? degreesValue;
   FormFieldController<String>? degreesValueController;
@@ -39,5 +39,6 @@ class ScholarshipfinderModel extends FlutterFlowModel<ScholarshipfinderWidget> {
   @override
   void dispose() {
     textFieldFocusNode?.dispose();
+    textController?.dispose();
   }
 }

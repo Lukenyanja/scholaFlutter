@@ -57,7 +57,6 @@ class _MyAppState extends State<MyApp> {
       _router.routerDelegate.currentConfiguration.matches
           .map((e) => getRoute(e))
           .toList();
-
   late Stream<BaseAuthUser> userStream;
 
   final authUserSub = authenticatedUserStream.listen((_) {});
@@ -147,9 +146,9 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
+      'home': HomeWidget(),
       'scholarshipfinder': ScholarshipfinderWidget(),
       'ScholaAI2': ScholaAI2Widget(),
-      'home': HomeWidget(),
       'Settings': SettingsWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
@@ -172,6 +171,18 @@ class _NavBarPageState extends State<NavBarPage> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
+              Icons.house,
+              size: 24.0,
+            ),
+            activeIcon: Icon(
+              Icons.home,
+              size: 28.0,
+            ),
+            label: 'Home',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
               Icons.school_rounded,
             ),
             label: 'Scholarships',
@@ -182,18 +193,6 @@ class _NavBarPageState extends State<NavBarPage> {
               FontAwesomeIcons.react,
             ),
             label: 'AI Advisor',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.house,
-              size: 24.0,
-            ),
-            activeIcon: Icon(
-              Icons.home,
-              size: 28.0,
-            ),
-            label: 'Home',
             tooltip: '',
           ),
           BottomNavigationBarItem(

@@ -456,7 +456,7 @@ class _ContactWidgetState extends State<ContactWidget>
                                           CrossAxisAlignment.center,
                                       children: [
                                         Icon(
-                                          Icons.search_rounded,
+                                          Icons.social_distance_rounded,
                                           color: FlutterFlowTheme.of(context)
                                               .primary,
                                           size: 36.0,
@@ -466,7 +466,7 @@ class _ContactWidgetState extends State<ContactWidget>
                                               EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 12.0, 0.0, 0.0),
                                           child: Text(
-                                            'Search FAQs',
+                                            'Chat ',
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
@@ -556,7 +556,7 @@ class _ContactWidgetState extends State<ContactWidget>
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'How do I download Code?',
+                                    'Is there a fee to use the app?',
                                     style: FlutterFlowTheme.of(context)
                                         .bodyLarge
                                         .override(
@@ -585,7 +585,7 @@ class _ContactWidgetState extends State<ContactWidget>
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 4.0, 0.0, 0.0),
                                     child: Text(
-                                      'Showcase a couple of eye-catching screenshots or mockups of your UI Kit to capture attention and give users a glimpse of what they can expect.',
+                                      'The app is free to download and use. Some scholarships may have their own application fees, which are not controlled by the app.',
                                       style: FlutterFlowTheme.of(context)
                                           .labelMedium
                                           .override(
@@ -641,7 +641,7 @@ class _ContactWidgetState extends State<ContactWidget>
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'How do I download Code?',
+                                    'Is my personal information secure',
                                     style: FlutterFlowTheme.of(context)
                                         .bodyLarge
                                         .override(
@@ -670,7 +670,7 @@ class _ContactWidgetState extends State<ContactWidget>
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 4.0, 0.0, 0.0),
                                     child: Text(
-                                      'Showcase a couple of eye-catching screenshots or mockups of your UI Kit to capture attention and give users a glimpse of what they can expect.',
+                                      'Yes, we use encryption and follow strict privacy policies to protect your data. Review our Privacy Policy for details.\n\n',
                                       style: FlutterFlowTheme.of(context)
                                           .labelMedium
                                           .override(
@@ -726,7 +726,7 @@ class _ContactWidgetState extends State<ContactWidget>
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'How do I download Code?',
+                                    'What if I’m not eligible for any scholarships',
                                     style: FlutterFlowTheme.of(context)
                                         .bodyLarge
                                         .override(
@@ -755,7 +755,7 @@ class _ContactWidgetState extends State<ContactWidget>
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 4.0, 0.0, 0.0),
                                     child: Text(
-                                      'Showcase a couple of eye-catching screenshots or mockups of your UI Kit to capture attention and give users a glimpse of what they can expect.',
+                                      'Update your profile with more details or check back regularly, as new scholarships are added frequently.\n',
                                       style: FlutterFlowTheme.of(context)
                                           .labelMedium
                                           .override(
@@ -793,54 +793,12 @@ class _ContactWidgetState extends State<ContactWidget>
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
-                child: FFButtonWidget(
-                  onPressed: () {
-                    print('Button pressed ...');
-                  },
-                  text: 'Create Ticket',
-                  icon: Icon(
-                    Icons.receipt_long,
-                    size: 15.0,
-                  ),
-                  options: FFButtonOptions(
-                    width: double.infinity,
-                    height: 48.0,
-                    padding: EdgeInsets.all(0.0),
-                    iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                    textStyle: FlutterFlowTheme.of(context).bodyLarge.override(
-                          font: GoogleFonts.inter(
-                            fontWeight: FlutterFlowTheme.of(context)
-                                .bodyLarge
-                                .fontWeight,
-                            fontStyle: FlutterFlowTheme.of(context)
-                                .bodyLarge
-                                .fontStyle,
-                          ),
-                          letterSpacing: 0.0,
-                          fontWeight:
-                              FlutterFlowTheme.of(context).bodyLarge.fontWeight,
-                          fontStyle:
-                              FlutterFlowTheme.of(context).bodyLarge.fontStyle,
-                        ),
-                    elevation: 3.0,
-                    borderSide: BorderSide(
-                      color: FlutterFlowTheme.of(context).alternate,
-                      width: 1.0,
-                    ),
-                    borderRadius: BorderRadius.circular(60.0),
-                  ),
-                ),
-              ),
-              Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 12.0),
                 child: FFButtonWidget(
                   onPressed: () {
                     print('Button pressed ...');
                   },
-                  text: 'Chat Now',
+                  text: 'Email us at scholarmailer@gmail.com',
                   icon: Icon(
                     Icons.support_agent_rounded,
                     size: 15.0,

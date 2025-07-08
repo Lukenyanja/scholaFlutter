@@ -226,6 +226,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.String,
             ),
           ),
+        ),
+        FFRoute(
+          name: NotificationWidget.routeName,
+          path: NotificationWidget.routePath,
+          builder: (context, params) => NotificationWidget(),
+        ),
+        FFRoute(
+          name: PrivacyWidget.routeName,
+          path: PrivacyWidget.routePath,
+          builder: (context, params) => PrivacyWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

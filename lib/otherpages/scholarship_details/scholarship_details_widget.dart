@@ -2,6 +2,7 @@ import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -326,7 +327,8 @@ class _ScholarshipDetailsWidgetState extends State<ScholarshipDetailsWidget> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          'Application Deadline',
+                                          'Location',
+                                          textAlign: TextAlign.start,
                                           style: FlutterFlowTheme.of(context)
                                               .titleMedium
                                               .override(
@@ -347,7 +349,12 @@ class _ScholarshipDetailsWidgetState extends State<ScholarshipDetailsWidget> {
                                               ),
                                         ),
                                         Text(
-                                          'March 15, 2026',
+                                          getJsonField(
+                                            scholarshipDetailsGetScholarshipDetailsResponse
+                                                .jsonBody,
+                                            r'''$.country''',
+                                          ).toString(),
+                                          textAlign: TextAlign.start,
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
@@ -385,7 +392,8 @@ class _ScholarshipDetailsWidgetState extends State<ScholarshipDetailsWidget> {
                                           CrossAxisAlignment.end,
                                       children: [
                                         Text(
-                                          'Location',
+                                          'Students  Allowed',
+                                          textAlign: TextAlign.start,
                                           style: FlutterFlowTheme.of(context)
                                               .titleMedium
                                               .override(
@@ -409,8 +417,12 @@ class _ScholarshipDetailsWidgetState extends State<ScholarshipDetailsWidget> {
                                           getJsonField(
                                             scholarshipDetailsGetScholarshipDetailsResponse
                                                 .jsonBody,
-                                            r'''$.country''',
-                                          ).toString(),
+                                            r'''$.eligibity''',
+                                          ).toString().maybeHandleOverflow(
+                                                maxChars: 40,
+                                                replacement: '…',
+                                              ),
+                                          textAlign: TextAlign.start,
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
@@ -566,39 +578,12 @@ class _ScholarshipDetailsWidgetState extends State<ScholarshipDetailsWidget> {
                                   getJsonField(
                                     scholarshipDetailsGetScholarshipDetailsResponse
                                         .jsonBody,
-                                    r'''$.description''',
+                                    r'''$.mobile_about''',
                                   ).toString(),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        font: GoogleFonts.inter(
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .fontStyle,
-                                        ),
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontStyle,
-                                        lineHeight: 1.5,
-                                      ),
-                                ),
-                                Text(
-                                  'This prestigious award aims to attract top talent from around the world and foster a diverse, global community of scholars committed to making significant contributions in their fields of study and beyond.',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        font: GoogleFonts.inter(
+                                        font: GoogleFonts.roboto(
                                           fontWeight:
                                               FlutterFlowTheme.of(context)
                                                   .bodyMedium
@@ -623,56 +608,6 @@ class _ScholarshipDetailsWidgetState extends State<ScholarshipDetailsWidget> {
                                 Divider(
                                   thickness: 1.0,
                                   color: FlutterFlowTheme.of(context).alternate,
-                                ),
-                                Text(
-                                  'Benefits',
-                                  style: FlutterFlowTheme.of(context)
-                                      .titleMedium
-                                      .override(
-                                        font: GoogleFonts.interTight(
-                                          fontWeight: FontWeight.w600,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleMedium
-                                                  .fontStyle,
-                                        ),
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w600,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .titleMedium
-                                            .fontStyle,
-                                      ),
-                                ),
-                                Text(
-                                  getJsonField(
-                                    scholarshipDetailsGetScholarshipDetailsResponse
-                                        .jsonBody,
-                                    r'''$.benefits''',
-                                  ).toString(),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        font: GoogleFonts.inter(
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .fontStyle,
-                                        ),
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontStyle,
-                                        lineHeight: 1.5,
-                                      ),
                                 ),
                                 Divider(
                                   thickness: 1.0,
@@ -707,13 +642,16 @@ class _ScholarshipDetailsWidgetState extends State<ScholarshipDetailsWidget> {
                                           FlutterFlowTheme.of(context).primary,
                                       size: 20.0,
                                     ),
-                                    Text(
+                                    AutoSizeText(
                                       getJsonField(
                                         scholarshipDetailsGetScholarshipDetailsResponse
                                             .jsonBody,
                                         r'''$.application_link''',
-                                      ).toString(),
-                                      maxLines: 3,
+                                      ).toString().maybeHandleOverflow(
+                                            maxChars: 50,
+                                            replacement: '…',
+                                          ),
+                                      maxLines: 1,
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(

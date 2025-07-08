@@ -35,3 +35,6 @@ export '/account_profile_creation2/auth_2_profile/auth2_profile_widget.dart'
 export '/account_profile_creation2/auth_2_edit_profile/auth2_edit_profile_widget.dart'
     show Auth2EditProfileWidget;
 export '/otherpages/subjects/subjects_widget.dart' show SubjectsWidget;
+export '/otherpages/notification/notification_widget.dart'
+    show NotificationWidget;
+export '/privacy/privacy_widget.dart' show PrivacyWidget;

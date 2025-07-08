@@ -559,6 +559,10 @@ class _Auth2CreateWidgetState extends State<Auth2CreateWidget>
                                   0.0, 0.0, 0.0, 16.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
+                                  context.goNamedAuth(
+                                      Auth2CreateProfileWidget.routeName,
+                                      context.mounted);
+
                                   GoRouter.of(context).prepareAuthEvent();
                                   if (_model.passwordTextController.text !=
                                       _model.confirmTextController.text) {
@@ -581,10 +585,6 @@ class _Auth2CreateWidgetState extends State<Auth2CreateWidget>
                                   if (user == null) {
                                     return;
                                   }
-
-                                  context.goNamedAuth(
-                                      Auth2CreateProfileWidget.routeName,
-                                      context.mounted);
                                 },
                                 text: 'Create Account',
                                 options: FFButtonOptions(
@@ -626,20 +626,35 @@ class _Auth2CreateWidgetState extends State<Auth2CreateWidget>
                                 ),
                               ),
                             ),
-                            Opacity(
-                              opacity: 0.1,
-                              child: Align(
-                                alignment: AlignmentDirectional(0.0, 0.0),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      16.0, 0.0, 16.0, 24.0),
-                                  child: Text(
-                                    'Or sign up with',
-                                    textAlign: TextAlign.center,
-                                    style: FlutterFlowTheme.of(context)
-                                        .labelLarge
-                                        .override(
-                                          font: GoogleFonts.inter(
+                            if (responsiveVisibility(
+                              context: context,
+                              phone: false,
+                              tablet: false,
+                            ))
+                              Opacity(
+                                opacity: 0.1,
+                                child: Align(
+                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16.0, 0.0, 16.0, 24.0),
+                                    child: Text(
+                                      'Or sign up with',
+                                      textAlign: TextAlign.center,
+                                      style: FlutterFlowTheme.of(context)
+                                          .labelLarge
+                                          .override(
+                                            font: GoogleFonts.inter(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelLarge
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelLarge
+                                                      .fontStyle,
+                                            ),
+                                            letterSpacing: 0.0,
                                             fontWeight:
                                                 FlutterFlowTheme.of(context)
                                                     .labelLarge
@@ -649,20 +664,10 @@ class _Auth2CreateWidgetState extends State<Auth2CreateWidget>
                                                     .labelLarge
                                                     .fontStyle,
                                           ),
-                                          letterSpacing: 0.0,
-                                          fontWeight:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelLarge
-                                                  .fontWeight,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelLarge
-                                                  .fontStyle,
-                                        ),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
                             if (responsiveVisibility(
                               context: context,
                               phone: false,

@@ -47,16 +47,13 @@ class _EditProfileAuth2WidgetState extends State<EditProfileAuth2Widget> {
         TextEditingController(text: currentUserDisplayName);
     _model.usernameFocusNode ??= FocusNode();
 
-    _model.locationTextController ??=
-        TextEditingController(text: 'Current location');
+    _model.locationTextController ??= TextEditingController();
     _model.locationFocusNode ??= FocusNode();
 
-    _model.destinationTextController ??=
-        TextEditingController(text: 'Where do you like to study  from');
+    _model.destinationTextController ??= TextEditingController();
     _model.destinationFocusNode ??= FocusNode();
 
-    _model.degreeTextController ??=
-        TextEditingController(text: 'Degree to undertake');
+    _model.degreeTextController ??= TextEditingController();
     _model.degreeFocusNode ??= FocusNode();
   }
 
@@ -410,7 +407,7 @@ class _EditProfileAuth2WidgetState extends State<EditProfileAuth2Widget> {
                       fontStyle:
                           FlutterFlowTheme.of(context).labelMedium.fontStyle,
                     ),
-                hintText: 'Your full name...',
+                hintText: 'Enter current location',
                 hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
                       font: GoogleFonts.inter(
                         fontWeight:
@@ -522,7 +519,7 @@ class _EditProfileAuth2WidgetState extends State<EditProfileAuth2Widget> {
                       fontStyle:
                           FlutterFlowTheme.of(context).labelMedium.fontStyle,
                     ),
-                hintText: 'Your full name...',
+                hintText: 'Where do you like to study  from',
                 hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
                       font: GoogleFonts.inter(
                         fontWeight:
@@ -731,7 +728,7 @@ class _EditProfileAuth2WidgetState extends State<EditProfileAuth2Widget> {
                 onPressed: () async {
                   context.pushNamed(HomeWidget.routeName);
                 },
-                text: widget.confirmButtonText,
+                text: 'Save Changes',
                 options: FFButtonOptions(
                   width: double.infinity,
                   height: 44.0,
@@ -739,6 +736,46 @@ class _EditProfileAuth2WidgetState extends State<EditProfileAuth2Widget> {
                   iconPadding:
                       EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   color: FlutterFlowTheme.of(context).primary,
+                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                        font: GoogleFonts.interTight(
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .titleSmall
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).titleSmall.fontStyle,
+                        ),
+                        letterSpacing: 0.0,
+                        fontWeight:
+                            FlutterFlowTheme.of(context).titleSmall.fontWeight,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).titleSmall.fontStyle,
+                      ),
+                  elevation: 3.0,
+                  borderSide: BorderSide(
+                    color: Colors.transparent,
+                    width: 1.0,
+                  ),
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+              ),
+            ),
+          ),
+          Align(
+            alignment: AlignmentDirectional(0.0, 0.0),
+            child: Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(20.0, 24.0, 20.0, 0.0),
+              child: FFButtonWidget(
+                onPressed: () async {
+                  context.pushNamed(HomeWidget.routeName);
+                },
+                text: 'Skip',
+                options: FFButtonOptions(
+                  width: double.infinity,
+                  height: 44.0,
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                  iconPadding:
+                      EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
                   textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                         font: GoogleFonts.interTight(
                           fontWeight: FlutterFlowTheme.of(context)

@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -387,6 +388,76 @@ class _ScholaAI2WidgetState extends State<ScholaAI2Widget> {
                             ),
                           ].divide(SizedBox(width: 12.0)),
                         ),
+                      if (responsiveVisibility(
+                        context: context,
+                        phone: false,
+                      ))
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: 36.0,
+                              height: 36.0,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context).primary,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Align(
+                                alignment: AlignmentDirectional(0.0, 0.0),
+                                child: Icon(
+                                  Icons.smart_toy_rounded,
+                                  color: FlutterFlowTheme.of(context).info,
+                                  size: 20.0,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              constraints: BoxConstraints(
+                                maxWidth:
+                                    MediaQuery.sizeOf(context).width * 0.8,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Color(0xFFCCCCCC),
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 5.0,
+                                    color: Color(0x0D000000),
+                                    offset: Offset(
+                                      0.0,
+                                      2.0,
+                                    ),
+                                  )
+                                ],
+                                borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(16.0),
+                                  bottomRight: Radius.circular(16.0),
+                                  topLeft: Radius.circular(0.0),
+                                  topRight: Radius.circular(16.0),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.all(16.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      child: MarkdownBody(
+                                        data:
+                                            '''# Header 1\n## Header 2\n### Header 3\n\n*This text will be italic*\n\n**This text will be bold**\n\nHere are some top scholarship opportunities in the UK for you:\\n\\n1. **University of Westminster UK Scholarships 2025**\\n - **Funding Status:** Fully Funded or Partial Funding\\n - **Degrees:** Undergraduate, Postgraduate\\n - **Subjects:** All subjects\\n - **Closing Date:** 2025-07-07\\n\\n2. **The University of Manchester UK Offers GREAT Scholarships 2025 for International Students**\\n - **Funding Status:** Tuition Fee Reduction\\n - **Degree:** Masters\\n - **Subjects:** All subjects\\n - **Closing Date:** 2025-04-24\\n - **Details:** This scholarship supports students from several countries i...''',
+                                        selectable: true,
+                                        onTapLink: (_, url, __) =>
+                                            launchURL(url!),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ].divide(SizedBox(width: 12.0)),
+                        ),
                     ].divide(SizedBox(height: 10.0)),
                   ),
                 ),
@@ -502,7 +573,11 @@ class _ScholaAI2WidgetState extends State<ScholaAI2Widget> {
                               frameRate: FrameRate(160.0),
                               animate: true,
                             ),
-                          if (FFAppState().loading == false)
+                          if ((FFAppState().loading == false) &&
+                              responsiveVisibility(
+                                context: context,
+                                phone: false,
+                              ))
                             FlutterFlowIconButton(
                               borderRadius: 24.0,
                               buttonSize: 48.0,
